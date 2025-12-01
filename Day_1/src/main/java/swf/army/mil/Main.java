@@ -16,8 +16,8 @@ public class Main {
 
         String[] Turns = Files.readAllLines(myFile.toPath()).toArray(new String[0]);
 
-        Character[] Directions = new Character[10];
-        Integer[] Ticks = new Integer[10];
+        Character[] Directions = new Character[Turns.length];
+        Integer[] Ticks = new Integer[Turns.length];
         for (int index = 0; index <= Turns.length-1; index++) {
             Directions[index] = Turns[index].charAt(0);
             Ticks[index] = Integer.parseInt(Turns[index].substring(1));
@@ -32,6 +32,9 @@ public class Main {
         int ZeroCount = 0;
 
         for(int index = 0; index <= Turns.length-1; index++) {
+            while (Ticks[index] > 100) {
+                Ticks[index] -= 100;
+            }
             if (Directions[index] == 'L') {
                 if (Dial - Ticks[index] < 0) {
                     Dial = 100 - (Ticks[index]-Dial);
